@@ -15,21 +15,40 @@ Tools to help primary school teacher to manage children based on their psycholog
 
 ## Introduction
 
-In the following we will consider the metrics below :
-- Agitation : Too much agitation induce
-    - Assumption : Affinity is correlated with agitation
+
+In the following, the tool considers several key psychological metrics to facilitate optimal groupings:
+
+- **Agitation**: High levels of agitation can disrupt focus and group cohesion.
+    - **Assumption**: Children with similar levels of agitation are more likely to have affinity and collaborate effectively.
+- **Mental Health**: Measures related to emotional well-being, resilience, and stress tolerance.
+    - **Goal**: Group children with similar mental health profiles or distribute varied profiles based on project needs.
+- **Social Engagement**: Levels of participation, willingness to collaborate, and social interactions.
+    - **Goal**: Create groups with balanced or complementary social engagement levels to support inclusive activities.
+- **Learning Styles**: Preferences for hands-on activities, visual aids, or verbal instructions.
+    - **Assumption**: Grouping by similar or complementary learning styles can enhance collaborative learning outcomes.
+- **Temperament**: General disposition, such as being calm, reactive, or adaptable.
+    - **Goal**: Form groups with a mix of temperaments to promote balanced interactions.
 
 ### Inside a class
 
-A teacher may be interested in grouping children in a specific way (for projects or spatial placement in class) to optimize the above metrics.
+Teachers can use this tool to form groups or arrange seating to achieve specific goals, such as minimizing disruptions, enhancing collaboration, or supporting specific learning needs based on students' psychological profiles.
 
 ### On multiple classes
 
+School administrators may apply these tools to ensure a balanced distribution of psychological profiles across classes, fostering a more harmonious environment and equitable resource allocation.
+
 ## Features
+
+Clustering
 
 ## Setup
 
 ### Installation
+
+- Docker installation
+```sh
+docker build -t Social-Group-Clustering
+```
 
 - conda install of the dependencies :
 ```sh
@@ -44,9 +63,14 @@ conda env create -f environment.yml
 ### Run
 
 ```sh
-make ? # run the client
-make ? # run the demo
-make ? # run the tests
+# To launch the docker
+docker run -it Social-Group-Clustering
+```
+
+```sh
+make run # run the client
+make demo # run the demo
+make test # run the tests
 ```
 
 ## Future Development
