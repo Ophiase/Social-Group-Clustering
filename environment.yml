@@ -1,0 +1,10 @@
+name: social-group-clustering
+channels:
+  - defaults
+dependencies:
+  - python=3.11.5
+  - numpy
+  - opencv
+  - matplotlib
+  - pip
+  - pip:
