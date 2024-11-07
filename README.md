@@ -37,6 +37,18 @@ Teachers can use this tool to form groups or arrange seating to achieve specific
 
 School administrators may apply these tools to ensure a balanced distribution of psychological profiles across classes, fostering a more harmonious environment and equitable resource allocation.
 
+### Data Collection Method
+
+To facilitate data collection, teachers can administer a structured survey to students in a game-like format, making the experience engaging and accessible. This survey can consist of two types of questions:
+
+- **Scale Questions**: Students rate statements on a scale from 0 to 10, where 0 represents the minimum level of agreement or relevance, and 10 represents the maximum. 
+- **Binary Questions**: True/False or Yes/No questions, encoded as 10 for "True" or "Yes" and 0 for "False" or "No."
+
+Teachers then compile the responses into a `.csv` file, where each column represents a question and each row corresponds to an individual student. If a student does not complete the survey, the software will generate values randomly within the 0-10 range to ensure completeness of the dataset.
+
+To further refine groupings, teachers may assign custom weights to each metric according to its importance in a particular context, allowing for targeted emphasis on specific psychological attributes during the clustering process.
+
+
 ## Features
 
 Clustering
