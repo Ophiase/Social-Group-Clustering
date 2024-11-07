@@ -1,6 +1,7 @@
 PYTHON = python3
 SOURCES = client/main.py
 TESTS = test_x
+EXAMPLES = music_school
 
 run:
 	python3 -m client.main
@@ -12,7 +13,7 @@ test_verbose:
 	$(foreach test,$(TESTS),python3 -m unittest tests.$(test) -v;)
 
 demo:
-	@echo TODO
+	$(foreach example,$(EXAMPLES),python3 -m examples.$(example).main;)
 
 conda_install:
 	conda env create -f environment.yml

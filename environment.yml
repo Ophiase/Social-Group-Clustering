@@ -7,4 +7,5 @@ dependencies:
   - opencv
   - matplotlib
   - pip
+  - kagglehub
   - pip:
