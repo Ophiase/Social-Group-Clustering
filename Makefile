@@ -13,7 +13,7 @@ test_verbose:
 	$(foreach test,$(TESTS),python3 -m unittest tests.$(test) -v;)
 
 demo:
-	$(foreach example,$(EXAMPLES),python3 -m examples.$(example).main;)
+	$(foreach example,$(EXAMPLES),python3 -m examples.$(example).$(example);)
 
 conda_install:
 	conda env create -f environment.yml
