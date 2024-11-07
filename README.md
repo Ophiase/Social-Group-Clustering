@@ -15,7 +15,7 @@ Tools to help primary school teacher to manage children based on their psycholog
 
 ## Introduction
 
-In the following we will consider the metrics bellow :
+In the following we will consider the metrics below :
 - Agitation : Too much agitation induce
     - Assumption : Affinity is correlated with agitation
 
