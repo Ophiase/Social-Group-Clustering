@@ -51,7 +51,6 @@ def spectral_clustering_epsilon(X, n_clusters, epsilon):
     :return: The cluster labels.
     Good for big epsilon 10,15
     """
-    # Construire un graphe basé sur les epsilon-voisins (c'est-à-dire les points dans un rayon de distance epsilon)
     connectivity = radius_neighbors_graph(X, radius=epsilon, mode='distance', include_self=False)
     
     spectral_clustering = SpectralClustering(n_clusters=n_clusters, affinity='sigmoid', assign_labels='kmeans', random_state=random_state)
@@ -59,3 +58,21 @@ def spectral_clustering_epsilon(X, n_clusters, epsilon):
     
     return labels
 
+
+def evaluate_silhouette_scores(X, n_clusters, k_neighbors, epsilon):
+    """
+    Évalue les scores de silhouette pour les deux méthodes de clustering spectral : k-nearest neighbors et epsilon-neighborhood.
+    :param X: Les données après réduction de dimension (PCA ou t-SNE).
+    :param n_clusters: Le nombre de clusters à former.
+    :param k_neighbors: Le nombre de voisins pour le graph de k-nearest neighbors.
+    :param epsilon: Le rayon pour le graph de epsilon-neighborhoods.
+    :return: Le score de silhouette pour k-nearest neighbors et epsilon-neighborhoods.
+    """
+    
+    cluster_labels_k = spectral_clustering_neighbors(X, n_clusters=n_clusters, k_neighbors=k_neighbors)
+    cluster_labels_epsilon = spectral_clustering_epsilon(X, n_clusters=n_clusters, epsilon=epsilon)
+    
+    score_k = silhouette_score(X, cluster_labels_k)
+    score_epsilon = silhouette_score(X, cluster_labels_epsilon)
+    
+    return score_epsilon, score_k
