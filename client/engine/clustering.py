@@ -31,7 +31,7 @@ def reduce_dimensionality(df, n_components, method, random_state):
     return reduced_data
 
 
-def spectral_clustering_neighbors(X, n_clusters, k_neighbors, random_state=None):
+def spectral_clustering_neighbors(X, n_clusters, k_neighbors, random_state):
     """
     Apply Spectral Clustering using a graph of k-nearest neighbors.
     :param X: The dataset after dimensionality reduction.
@@ -47,7 +47,7 @@ def spectral_clustering_neighbors(X, n_clusters, k_neighbors, random_state=None)
     return labels
 
 
-def spectral_clustering_epsilon(X, n_clusters, epsilon, random_state=None):
+def spectral_clustering_epsilon(X, n_clusters, epsilon, random_state):
     """
     Apply Spectral Clustering using a graph of epsilon-neighborhoods.
     :param X: The dataset after dimensionality reduction.
