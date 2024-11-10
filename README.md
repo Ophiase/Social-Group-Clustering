@@ -1,4 +1,4 @@
-# Social-Group-Clustering
+# Social Group Clustering 🎒
 
 Tools to help primary school teacher to manage children based on their psychologic profile using spectral clustering (unsupervised learning).
 
@@ -14,7 +14,6 @@ Tools to help primary school teacher to manage children based on their psycholog
 - [Future Development](#future-development)
 
 ## Introduction
-
 
 In the following, the tool considers several key psychological metrics to facilitate optimal groupings:
 
@@ -65,11 +64,6 @@ docker build -t Social-Group-Clustering
 - conda install of the dependencies :
 ```sh
 conda env create -f environment.yml
-```
-
-- automatic install of dependencies :
-```sh
-./install_dependencies
 ```
 
 ### Run
