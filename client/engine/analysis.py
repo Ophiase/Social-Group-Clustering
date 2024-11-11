@@ -1,7 +1,6 @@
 import pandas as pd
 from client.engine.clustering import spectral_clustering_neighbors, spectral_clustering_epsilon
 from sklearn.metrics import silhouette_score
-from examples/music_school.load_data import transform
 
 
 def evaluate_silhouette_scores(X: np.ndarray, n_clusters: int, k_neighbors: int, epsilon: float) -> tuple:
