@@ -1,4 +1,4 @@
-from gui.application import Application
+
 from engine.clustering import reduce_dimensionality, spectral_clustering_neighbors, spectral_clustering_epsilon
 from engine.analysis import evaluate_silhouette_scores, analyze_cluster_characteristics
 from engine.visualisations import plot_cluster_heatmap, plot_numerical_distribution, plot_cluster_correlation_heatmap
@@ -17,7 +17,7 @@ def main():
     """
     Main function to load, clean, and prepare the dataset.
     """
-    pd.set_option('display.max_columns', 10)  
+    #pd.set_option('display.max_columns', 10)  
     path = extract()  
     df = load(path)    
     transformed_df = transform(df)  
