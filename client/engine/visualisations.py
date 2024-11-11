@@ -5,10 +5,12 @@ import plotly.graph_objects as go
 import plotly.express as px
 
 
+
 def plot_cluster_heatmap(
     cluster_summary: pd.DataFrame, 
     title_suffix: str = ""
 ) -> None:
+
     """
     Plot a heatmap of mean characteristics for each cluster.
 
@@ -44,11 +46,13 @@ def plot_cluster_heatmap(
 
 
 
+
 def plot_numerical_distribution(
     df: pd.DataFrame, 
     numerical_column: str, 
     labels: np.ndarray
 ) -> None:
+
     """
     Plot a box plot for the distribution of a numerical column across clusters.
 
@@ -64,10 +68,12 @@ def plot_numerical_distribution(
 
 
 
+
 def def plot_cluster_correlation_heatmap(
     df: pd.DataFrame, 
     labels: np.ndarray
 ) -> None:
+
     """
     Plot correlation heatmaps for each cluster.
 
