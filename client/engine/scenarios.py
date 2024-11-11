@@ -44,11 +44,11 @@ def define_scenarios() -> Dict[str, Dict[str, float]]:
             'Age': 1
         },
         "Scenario 3": {
-            'Anxiety': 15,
-            'Depression': 10,
-            'Music_Hours_Per_Week': 12,
-            'OCD': 5,
-            'Age': 3
+            'Anxiety': 1,
+            'Depression': 1,
+            'Music_Hours_Per_Week': 10,
+            'While working' : 10,
+            'Frequency [classical]' : 10
         }
     }
     return scenarios
