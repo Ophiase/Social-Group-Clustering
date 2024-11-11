@@ -1,4 +1,7 @@
 import pandas as pd
+from plotly.subplots import make_subplots
+import plotly.graph_objects as go
+import plotly.express as px
 from client.engine.clustering import reduce_dimensionality, spectral_clustering_neighbors, spectral_clustering_epsilon
 from client.engine.analysis import evaluate_silhouette_scores, analyze_cluster_characteristics
 from client.engine.visualisations import plot_cluster_heatmap, plot_numerical_distribution, plot_cluster_correlation_heatmap
