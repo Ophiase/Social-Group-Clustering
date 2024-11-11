@@ -17,11 +17,11 @@ def main():
     """
     Main function to load, clean, and prepare the dataset.
     """
-    pd.set_option('display.max_columns', 10)  # Optional: limits the displayed columns for readability
-    path = extract()  # Extracts path to the dataset
-    df = load(path)    # Loads the dataset
-    transformed_df = transform(df)  # Transforms/cleans the dataset
-    display_data(transformed_df)    # Processes, clusters, and visualizes the data
+    pd.set_option('display.max_columns', 10)  
+    path = extract()  
+    df = load(path)    
+    transformed_df = transform(df)  
+    display_data(transformed_df)   
 
 
 def display_data(df):
