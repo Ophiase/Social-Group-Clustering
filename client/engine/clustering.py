@@ -304,3 +304,11 @@ def test_and_visualize_scenarios(df, n_clusters,method, cluster_labels, cluster_
 
 
 
+    n_clusters = 2
+    k_neighbors = 30
+    epsilon = 15
+    n_components = 2
+    random_state = 42
+    method='t-SNE'
+
+
