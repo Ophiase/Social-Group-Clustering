@@ -42,3 +42,11 @@ def spectral_clustering(X, n_clusters, k_neighbors):
 
 
 
+    n_clusters = 2
+    k_neighbors = 30
+    epsilon = 15
+    n_components = 2
+    random_state = 42
+    method='t-SNE'
+
+
