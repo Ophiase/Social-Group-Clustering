@@ -6,6 +6,8 @@ from sklearn.neighbors import kneighbors_graph
 from sklearn.neighbors import radius_neighbors_graph
 import plotly.graph_objects as go
 import plotly.express as px
+from plotly.subplots import make_subplots
+
 
 ####CLUSTERING#####
 
@@ -283,25 +285,39 @@ def test_and_visualize_scenarios(df, n_clusters,method, cluster_labels, cluster_
         plot_selected_features_histogram(df, selected_features, cluster_labels)
 
         print(f"Reduced Dimensions Visualization - Before vs After Weighting for {scenario_name}")
-        plt.figure(figsize=(14, 7))
+        fig = make_subplots(rows=1, cols=2, subplot_titles=[f"{scenario_name} - Before Weighting", f"{scenario_name} - After Weighting"])
+
         
-        plt.subplot(1, 2, 1)
-        plt.scatter(reduced_data_normal[:, 0], reduced_data_normal[:, 1], c=cluster_labels, cmap='viridis', label="Original Data")
-        plt.title(f"{scenario_name} - Before Weighting")
-        plt.xlabel("Principal Component 1")
-        plt.ylabel("Principal Component 2")
-        plt.legend()
+        fig.add_trace(go.Scatter(
+            x=reduced_data_normal[:, 0], 
+            y=reduced_data_normal[:, 1], 
+            mode='markers', 
+            marker=dict(color=cluster_labels, colorscale='Viridis'), 
+            name="Original Data"
+        ), row=1, col=1)
 
-        plt.subplot(1, 2, 2)
-        plt.scatter(reduced_data_weighted[:, 0], reduced_data_weighted[:, 1], c=cluster_labels_weighted, cmap='viridis', label="Weighted Data")
-        plt.title(f"{scenario_name} - After Weighting")
-        plt.xlabel("Principal Component 1")
-        plt.ylabel("Principal Component 2")
-        plt.legend()
+        
+        fig.add_trace(go.Scatter(
+            x=reduced_data_weighted[:, 0], 
+            y=reduced_data_weighted[:, 1], 
+            mode='markers', 
+            marker=dict(color=cluster_labels_weighted, colorscale='Viridis'), 
+            name="Weighted Data"
+        ), row=1, col=2)
 
-        plt.tight_layout()
-        plt.show()
+        
+        fig.update_layout(
+            title=f"Reduced Dimensions Visualization - Before vs After Weighting for {scenario_name}",
+            xaxis=dict(range=[-60, 60]),   
+            yaxis=dict(range=[-20, 20]),   
+            xaxis2=dict(range=[-60, 60]),  
+            yaxis2=dict(range=[-20, 20]),  
+            width=900,
+            height=600, 
+            autosize=False
+        )
 
+        fig.show()
 
 
     n_clusters = 2
