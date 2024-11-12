@@ -8,23 +8,24 @@ from plotly.subplots import make_subplots
 
 def generate_graphics(
     df: pd.DataFrame,
-    n_clusters: int,
-    method: str,
+    clusters : np.ndarray,
     cluster_labels: pd.Series,
     cluster_summary: pd.DataFrame,
-    cluster_summary_std: pd.DataFrame,
-    scenarios: Dict[str, Weighting],
-    n_components: int,
-    k_neighbors: int,
-    epsilon: float
+    cluster_summary_std: pd.DataFrame
 ) -> Dict[str, Figure]:
     result = {}
 
-    
+    # result["std_dev"] = figure_cluster_heatmap(cluster_summary_std, title_suffix=f"Standard Deviation")
+    # result["mean"] = figure_cluster_heatmap(cluster_summary, title_suffix=f"Mean")
+
+    # for column in df.columns:
+    #     figure_numerical_distribution(df, column, clusters)        
+
+    # figure_clustering()
 
     return result
 
-def plot_cluster_heatmap(
+def figure_cluster_heatmap(
     cluster_summary: pd.DataFrame, 
     title_suffix: str = ""
 ) -> Figure:
@@ -61,7 +62,7 @@ def plot_cluster_heatmap(
 
     return fig
 
-def plot_numerical_distribution(
+def figure_numerical_distribution(
     df: pd.DataFrame, 
     numerical_column: str, 
     labels: np.ndarray
@@ -80,7 +81,7 @@ def plot_numerical_distribution(
 
     return fig
 
-def plot_cluster_correlation_heatmap(
+def figure_cluster_correlation_heatmap(
     df: pd.DataFrame, 
     labels: np.ndarray
 ) -> Figure:
@@ -118,7 +119,7 @@ def plot_cluster_correlation_heatmap(
         
         return fig
 
-def plot_clustering(
+def figure_clustering(
     scenario_name: str,
     reduced_data_normal,
     reduced_data_weighted,
