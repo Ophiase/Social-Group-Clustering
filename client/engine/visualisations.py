@@ -1,18 +1,33 @@
-
+from typing import Dict
 import pandas as pd
 import numpy as np
 import plotly.graph_objects as go
+from plotly.graph_objects import Figure
 import plotly.express as px
 from plotly.subplots import make_subplots
 
+def generate_graphics(
+    df: pd.DataFrame,
+    n_clusters: int,
+    method: str,
+    cluster_labels: pd.Series,
+    cluster_summary: pd.DataFrame,
+    cluster_summary_std: pd.DataFrame,
+    scenarios: Dict[str, Weighting],
+    n_components: int,
+    k_neighbors: int,
+    epsilon: float
+) -> Dict[str, Figure]:
+    result = {}
 
+    
 
+    return result
 
 def plot_cluster_heatmap(
     cluster_summary: pd.DataFrame, 
     title_suffix: str = ""
-) -> None:
-
+) -> Figure:
     """
     Plot a heatmap of mean characteristics for each cluster.
 
@@ -43,17 +58,14 @@ def plot_cluster_heatmap(
         width=1000,
         height=600,
     )
-    
-    fig.show()
 
-
-
+    return fig
 
 def plot_numerical_distribution(
     df: pd.DataFrame, 
     numerical_column: str, 
     labels: np.ndarray
-) -> None:
+) -> Figure:
 
     """
     Plot a box plot for the distribution of a numerical column across clusters.
@@ -65,16 +77,13 @@ def plot_numerical_distribution(
     df['Cluster'] = labels
     fig = px.box(df, x='Cluster', y=numerical_column, title=f"Distribution of {numerical_column} by Cluster")
     fig.update_layout(xaxis_title="Clusters", yaxis_title=numerical_column)
-    fig.show()
 
-
-
-
+    return fig
 
 def plot_cluster_correlation_heatmap(
     df: pd.DataFrame, 
     labels: np.ndarray
-) -> None:
+) -> Figure:
 
     """
     Plot correlation heatmaps for each cluster.
@@ -107,8 +116,43 @@ def plot_cluster_correlation_heatmap(
             height=800
         )
         
-        fig.show()
+        return fig
 
+def plot_clustering(
+    scenario_name: str,
+    reduced_data_normal,
+    reduced_data_weighted,
+    cluster_labels_weighted,
+    cluster_labels
+    ) -> Figure : 
+    fig = make_subplots(rows=1, cols=2, subplot_titles=[f"{scenario_name} - Before Weighting", f"{scenario_name} - After Weighting"])
 
+    
+    fig.add_trace(go.Scatter(
+        x=reduced_data_normal[:, 0], 
+        y=reduced_data_normal[:, 1], 
+        mode='markers', 
+        marker=dict(color=cluster_labels, colorscale='Viridis'), 
+        name="Original Data"
+    ), row=1, col=1)
+    fig.add_trace(go.Scatter(
+        x=reduced_data_weighted[:, 0], 
+        y=reduced_data_weighted[:, 1], 
+        mode='markers', 
+        marker=dict(color=cluster_labels_weighted, colorscale='Viridis'), 
+        name="Weighted Data"
+    ), row=1, col=2)
 
-        
+    
+    fig.update_layout(
+        title=f"Reduced Dimensions Visualization - Before vs After Weighting for {scenario_name}",
+        xaxis=dict(range=[-60, 60]),   
+        yaxis=dict(range=[-20, 20]),   
+        xaxis2=dict(range=[-60, 60]),  
+        yaxis2=dict(range=[-20, 20]),  
+        width=900,
+        height=600, 
+        autosize=False
+    )
+
+    return fig
