@@ -1,3 +1,4 @@
+from typing import Dict
 import pandas as pd
 from plotly.subplots import make_subplots
 import plotly.graph_objects as go
@@ -68,7 +69,8 @@ def test_and_visualize_scenarios(
     n_components: int,
     k_neighbors: int,
     epsilon: float
-) -> None:    """
+) -> None:    
+    """
     Test different weighting scenarios, apply the weighting, reduce dimensionality, and generate all visualizations.
 
     :param df: DataFrame containing the original data
@@ -84,20 +86,21 @@ def test_and_visualize_scenarios(
     score_epsilon_normal, score_k_normal = evaluate_silhouette_scores(reduced_data_normal, n_clusters, k_neighbors, epsilon)
     print(f"Silhouette score for original data (epsilon method): {score_epsilon_normal:.3f}")
     print(f"Silhouette score for original data (k-nearest neighbors): {score_k_normal:.3f}")
-    
+
     plot_cluster_heatmap(cluster_summary_std, title_suffix="Standard Deviation (Original)")
     plot_cluster_heatmap(cluster_summary, title_suffix="Mean (Original)")
-    
+
     selected_features = ['Anxiety', 'Depression', 'Hours per day', 'Music effects', 'While working']
     plot_numerical_distribution(df, 'Anxiety', cluster_labels)
     plot_numerical_distribution(df, 'Depression', cluster_labels)
     plot_cluster_correlation_heatmap(df, cluster_labels)
     plot_selected_features_histogram(df, selected_features, cluster_labels)
-    
+
     for scenario_name, weighting_dict in scenarios.items():
         print(f"\nTesting {scenario_name}...")
 
-        df_weighted = apply_weighting(df, weighting_dict)reduced_data_weighted = reduce_dimensionality(df_weighted, n_components,method,random_state)
+        df_weighted = apply_weighting(df, weighting_dict)
+        reduced_data_weighted = reduce_dimensionality(df_weighted, n_components,method,random_state)
 
         score_epsilon_weighted, score_k_weighted = evaluate_silhouette_scores(reduced_data_weighted, n_clusters, k_neighbors, epsilon)
 
@@ -129,7 +132,7 @@ def test_and_visualize_scenarios(
             marker=dict(color=cluster_labels, colorscale='Viridis'), 
             name="Original Data"
         ), row=1, col=1)
-       fig.add_trace(go.Scatter(
+        fig.add_trace(go.Scatter(
             x=reduced_data_weighted[:, 0], 
             y=reduced_data_weighted[:, 1], 
             mode='markers', 

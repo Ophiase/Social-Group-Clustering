@@ -1,3 +1,4 @@
+import numpy as np
 import pandas as pd
 from client.engine.clustering import spectral_clustering_neighbors, spectral_clustering_epsilon
 from sklearn.metrics import silhouette_score

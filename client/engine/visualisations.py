@@ -71,7 +71,7 @@ def plot_numerical_distribution(
 
 
 
-def def plot_cluster_correlation_heatmap(
+def plot_cluster_correlation_heatmap(
     df: pd.DataFrame, 
     labels: np.ndarray
 ) -> None:

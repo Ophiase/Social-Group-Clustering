@@ -1,3 +1,4 @@
+from typing import Literal
 from sklearn.decomposition import PCA
 from sklearn.manifold import TSNE
 from sklearn.cluster import SpectralClustering

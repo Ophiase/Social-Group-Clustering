@@ -1,30 +1,39 @@
 
-from engine.clustering import reduce_dimensionality, spectral_clustering_neighbors, spectral_clustering_epsilon
-from engine.analysis import evaluate_silhouette_scores, analyze_cluster_characteristics
-from engine.visualisations import plot_cluster_heatmap, plot_numerical_distribution, plot_cluster_correlation_heatmap
-from engine.scenarios import apply_weighting, define_scenarios, test_and_visualize_scenarios
+import pandas as pd
+from client.engine.clustering import reduce_dimensionality, spectral_clustering_neighbors, spectral_clustering_epsilon
+from client.engine.analysis import evaluate_silhouette_scores, analyze_cluster_characteristics
+from client.engine.visualisations import plot_cluster_heatmap, plot_numerical_distribution, plot_cluster_correlation_heatmap
+from client.engine.scenarios import apply_weighting, define_scenarios, test_and_visualize_scenarios
 from .load_data import transform, extract, load
-
-n_clusters = 2
-k_neighbors = 30
-epsilon = 15
-n_components = 2
-random_state = 42
-method = 't-SNE'
 
 
 def main():
     """
     Main function to load, clean, and prepare the dataset.
     """
-    #pd.set_option('display.max_columns', 10)  
-    path = extract()  
-    df = load(path)    
-    transformed_df = transform(df)  
-    display_data(transformed_df)   
+    pd.set_option('display.max_columns', 10)  
+    df = transform(load(extract()))
+    print(df)
+
+    display_data(df,
+                 n_clusters = 2, 
+                 k_neighbors = 30, 
+                 epsilon = 15, 
+                 n_components = 2, 
+                 random_state = 42, 
+                 method = 't-SNE'
+                 )   
 
 
-def display_data(df):
+def display_data(
+        df : pd.DataFrame,
+        n_clusters : int = 2, 
+        k_neighbors : int = 30, 
+        epsilon : float = 15, 
+        n_components : int = 2, 
+        random_state : int = 83, 
+        method : str = 't-SNE'
+        ):
     """
     Function to process the data, apply clustering, evaluate clustering, and visualize results.
 
