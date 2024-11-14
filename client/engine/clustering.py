@@ -1,4 +1,4 @@
-from typing import Literal
+from typing import Dict, Literal, Tuple
 from sklearn.decomposition import PCA
 from sklearn.manifold import TSNE
 from sklearn.cluster import SpectralClustering
@@ -18,7 +18,7 @@ def clustering(
         n_components : int = 2,
         method: Literal['PCA', 't-SNE'] = 't-SNE', 
         random_state: int = None
-    ) -> np.ndarray:
+    ) -> Dict:
     
     X = reduce_dimensionality(df, n_components, method, random_state)
 
@@ -27,8 +27,15 @@ def clustering(
 
     score_k = silhouette_score(X, cluster_labels_k)
     score_epsilon = silhouette_score(X, cluster_labels_epsilon)
+    neighbors_instead_of_k = score_k > score_epsilon
+    clusters = cluster_labels_k if neighbors_instead_of_k else cluster_labels_epsilon
 
-    return cluster_labels_k if score_k > score_epsilon else cluster_labels_epsilon
+    return {
+        "clusters" : clusters,
+        "used_neighbors_instead_of_k" : neighbors_instead_of_k,
+        "score_k" : score_k,
+        "score_epsilon" : score_epsilon
+    }
 
 def reduce_dimensionality(
     df: pd.DataFrame, 

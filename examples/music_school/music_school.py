@@ -1,13 +1,9 @@
 
 from typing import Dict
 import pandas as pd
-from client.engine.clustering import evaluate_silhouette_scores, reduce_dimensionality, spectral_clustering_neighbors, spectral_clustering_epsilon, clustering
-from client.engine.analysis import analyze_cluster_characteristics
-from client.engine.save import save
-from client.engine.visualisations import figure_cluster_heatmap, figure_numerical_distribution, figure_cluster_correlation_heatmap, generate_graphics
-from client.engine.preprocessing import apply_weighting
-from client.engine.scenarios import test_and_visualize_scenarios
 from .load_data import transform, extract, load
+import warnings
+from client.gui.application import Application
 
 N_CLUSTERS = 5
 METHOD = "t-SNE"
@@ -39,22 +35,22 @@ def main():
     """
     Main function to load, clean, and prepare the dataset.
     """
+    
+    warnings.filterwarnings("ignore", category=UserWarning)
+    pd.set_option('display.max_columns', 3)  
 
     print("ELT\n---\n")
-
-    pd.set_option('display.max_columns', 3)  
     df = transform(load(extract()))
     print(df)
 
     #########################################
 
-    print("\nEvaluate scenarios\n---\n")
+    print("\nEvaluate scenarios : \n---\n")
     for scenario in SCENARIOS:
-        print(f"Evaluate the scenario\n---\n : {scenario}")
-
-        clusters = clustering(df, N_CLUSTERS, method=METHOD)
-        graphics = generate_graphics(df, clusters)
-        save(df, graphics, clusters, scenario)
+        print(f"\nCurrent scenario : {scenario}\n---\n")
+        print(SCENARIOS[scenario])
+        Application(N_CLUSTERS, METHOD).process(df)
+        print("========================================================")
 
 if __name__ == '__main__':
     main()
