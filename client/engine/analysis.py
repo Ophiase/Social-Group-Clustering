@@ -15,4 +15,9 @@ def analyze_cluster_characteristics(df: pd.DataFrame, labels: pd.Series) -> tupl
     df['Cluster'] = labels
     cluster_summary = df.groupby('Cluster').mean()
     cluster_summary_std = df.groupby('Cluster').std()
-    return cluster_summary, cluster_summary_std
+    cluster_variance = pd.DataFrame(cluster_summary.var(axis=0), columns=['Variance'])
+
+    return cluster_summary, cluster_summary_std, cluster_variance
+
+def top_k_attributes_by_variance(cluster_variance: pd.DataFrame, k: int = 5) -> list:
+    return cluster_variance['Variance'].nlargest(k).index.tolist()

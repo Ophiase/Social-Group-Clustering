@@ -53,7 +53,7 @@ def main():
         print(f"Evaluate the scenario\n---\n : {scenario}")
 
         clusters = clustering(df, N_CLUSTERS, method=METHOD)
-        graphics = generate_graphics(df, clusters, None, None, None)
+        graphics = generate_graphics(df, clusters)
         save(df, graphics, clusters, scenario)
 
 if __name__ == '__main__':

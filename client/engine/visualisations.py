@@ -6,22 +6,26 @@ from plotly.graph_objects import Figure
 import plotly.express as px
 from plotly.subplots import make_subplots
 
+from client.engine.analysis import analyze_cluster_characteristics, top_k_attributes_by_variance
+
 def generate_graphics(
     df: pd.DataFrame,
     clusters : np.ndarray,
-    cluster_labels: pd.Series,
-    cluster_summary: pd.DataFrame,
-    cluster_summary_std: pd.DataFrame
+    suffix : str = "",
+    max_important_attributes: int = 5
 ) -> Dict[str, Figure]:
     result = {}
 
-    # result["std_dev"] = figure_cluster_heatmap(cluster_summary_std, title_suffix=f"Standard Deviation")
-    # result["mean"] = figure_cluster_heatmap(cluster_summary, title_suffix=f"Mean")
+    cluster_summary, cluster_summary_std, cluster_variance = analyze_cluster_characteristics(df, pd.Series(clusters))
+    best_attributes = top_k_attributes_by_variance(cluster_variance, k=max_important_attributes)
 
-    # for column in df.columns:
-    #     figure_numerical_distribution(df, column, clusters)        
+    result["heat_map"] = figure_cluster_heatmap(cluster_summary, f"Heatmap | Mean : {suffix}")
+    result["heat_map_std"] = figure_cluster_heatmap(cluster_summary_std, f"Heatmap | Std : {suffix}")
+    result["cluster_correlation_heat_map"] = figure_cluster_correlation_heatmap(df, clusters)
 
-    # figure_clustering()
+    for attribute in best_attributes :
+       result[f"numerical_distribution_of_{attribute}"] = figure_numerical_distribution(df, attribute, clusters)
+       result[f"features_histogram_of_{attribute}"] = plot_selected_features_histogram(df, attribute, clusters)
 
     return result
 
@@ -36,7 +40,7 @@ def figure_cluster_heatmap(
     :param title_suffix: Suffix to append to the plot title (optional)
     """
     cluster_summary_transposed = cluster_summary.T
-    
+
     fig = go.Figure(data=go.Heatmap(
         z=cluster_summary_transposed.values,
         x=cluster_summary_transposed.columns.astype(str),
@@ -57,7 +61,7 @@ def figure_cluster_heatmap(
         ),
         yaxis_title="Features",
         width=1000,
-        height=600,
+        height=1000,
     )
 
     return fig
@@ -65,7 +69,7 @@ def figure_cluster_heatmap(
 def figure_numerical_distribution(
     df: pd.DataFrame, 
     numerical_column: str, 
-    labels: np.ndarray
+    clusters: np.ndarray
 ) -> Figure:
 
     """
@@ -75,7 +79,7 @@ def figure_numerical_distribution(
     :param numerical_column: The name of the numerical column to plot
     :param labels: Cluster labels for each data point
     """
-    df['Cluster'] = labels
+    df['Cluster'] = clusters
     fig = px.box(df, x='Cluster', y=numerical_column, title=f"Distribution of {numerical_column} by Cluster")
     fig.update_layout(xaxis_title="Clusters", yaxis_title=numerical_column)
 
@@ -83,7 +87,7 @@ def figure_numerical_distribution(
 
 def figure_cluster_correlation_heatmap(
     df: pd.DataFrame, 
-    labels: np.ndarray
+    clusters: np.ndarray
 ) -> Figure:
 
     """
@@ -92,7 +96,7 @@ def figure_cluster_correlation_heatmap(
     :param df: DataFrame containing the dataset
     :param labels: Cluster labels for each data point
     """
-    df['Cluster'] = labels
+    df['Cluster'] = clusters
     
     for cluster in sorted(df['Cluster'].unique()):
         cluster_data = df[df['Cluster'] == cluster].drop('Cluster', axis=1)
@@ -155,5 +159,26 @@ def figure_clustering(
         height=600, 
         autosize=False
     )
+
+    return fig
+
+def plot_selected_features_histogram(
+        df : pd.DataFrame, 
+        feature : str, 
+        clusters : np.array
+        ) -> Figure:
+    """
+    Plot histograms for selected features, colored by cluster.
+
+    :param df: DataFrame containing the dataset
+    :param feature: List of feature name to plot
+    :param cluster_labels: Cluster labels for each data point
+    """
+    df['Cluster'] = clusters
+
+    fig = go.Figure()
+    fig = px.histogram(df, x=feature, color="Cluster", barmode="overlay", nbins=20,
+                           title=f"Distribution of {feature} by Cluster")
+    fig.update_layout(xaxis_title=feature, yaxis_title="Frequency")
 
     return fig
