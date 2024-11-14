@@ -6,7 +6,7 @@ import pandas as pd
 
 Weighting = Dict[str, float]
 
-def apply_weighting(
+def apply_weights(
     df: pd.DataFrame, 
     weighting_dict: Dict[str, float]
 ) -> pd.DataFrame:

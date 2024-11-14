@@ -78,7 +78,7 @@ make demo # run the demo
 make test # run the tests
 
 python -m client.main --file df.csv # run the client on a specific csv
-# optional arguments : --n_clusters, --method, --suffix, --file
+# optional arguments : --n_clusters, --method, --suffix, --file, --weights
 ```
 
 ## Future Development

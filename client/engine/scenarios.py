@@ -7,7 +7,7 @@ import plotly.express as px
 from client.engine.clustering import reduce_dimensionality, spectral_clustering_neighbors, spectral_clustering_epsilon, evaluate_silhouette_scores
 from client.engine.analysis import analyze_cluster_characteristics
 from client.engine.visualisations import figure_cluster_heatmap, figure_numerical_distribution, figure_cluster_correlation_heatmap, figure_clustering
-from client.engine.preprocessing import Weighting, apply_weighting
+from client.engine.preprocessing import Weighting, apply_weights
 
 def test_and_visualize_scenarios(
     df: pd.DataFrame,
@@ -54,7 +54,7 @@ def test_and_visualize_scenarios(
     for scenario_name, weighting_dict in scenarios.items():
         print(f"\nTesting {scenario_name}...")
 
-        df_weighted = apply_weighting(df, weighting_dict)
+        df_weighted = apply_weights(df, weighting_dict)
         reduced_data_weighted = reduce_dimensionality(df_weighted, n_components,method,random_state)
 
         score_epsilon_weighted, score_k_weighted = evaluate_silhouette_scores(reduced_data_weighted, n_clusters, k_neighbors, epsilon)

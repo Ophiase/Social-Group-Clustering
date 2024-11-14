@@ -12,10 +12,13 @@ def main():
     parser.add_argument('--method', type=str, default=Application.DEFAULT_METHOD)
     parser.add_argument('--suffix', type=str, default="default")
     parser.add_argument('--file', type=str, required=True, help="Path to input CSV file")
+    parser.add_argument('--weights', type=str, required=True, help="Path to weight CSV file")
 
     args = parser.parse_args()
     
     df = pd.read_csv(args.file)
+    weights = pd.read_csv(args.weights).to_dict()
+
     app = Application(n_clusters=args.n_clusters, method=args.method, suffix=args.suffix)
-    app.process(df)
+    app.process(df, weights)
 

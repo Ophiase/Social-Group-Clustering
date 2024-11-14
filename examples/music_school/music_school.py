@@ -49,7 +49,7 @@ def main():
     for scenario in SCENARIOS:
         print(f"\nCurrent scenario : {scenario}\n---\n")
         print(SCENARIOS[scenario])
-        Application(N_CLUSTERS, METHOD).process(df)
+        Application(N_CLUSTERS, METHOD).process(df, SCENARIOS[scenario])
         print("========================================================")
 
 if __name__ == '__main__':
