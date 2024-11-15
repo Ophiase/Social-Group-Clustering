@@ -3,24 +3,24 @@ from sklearn.decomposition import PCA
 from sklearn.manifold import TSNE
 from sklearn.cluster import SpectralClustering
 from sklearn.neighbors import kneighbors_graph, radius_neighbors_graph
-from client.engine.analysis import silhouette_score
+from sklearn.metrics import silhouette_score
+from client.engine.dimensionality_reduction_method import DimensionalityReductionMethod
 import numpy as np
 import pandas as pd
-from plotly.subplots import make_subplots
-import plotly.graph_objects as go
-import plotly.express as px
 import random
+
 
 def clustering(
         df: pd.DataFrame, 
         n_clusters: int, 
-        epsilon : float = 15, k_neighbors : int = 30,
-        n_components : int = 2,
-        method: Literal['PCA', 't-SNE'] = 't-SNE', 
+        epsilon: float = 15, 
+        k_neighbors: int = 30,
+        n_components: int = 2,
+        method: DimensionalityReductionMethod = DimensionalityReductionMethod.TSNE, 
         random_state: int = None
     ) -> Dict:
     
-    X = reduce_dimensionality(df, n_components, method, random_state)
+    X = reduce_dimensionality(df, n_components, method.value, random_state)
 
     cluster_labels_k = spectral_clustering_neighbors(X, n_clusters=n_clusters, k_neighbors=k_neighbors, random_state=2838)
     cluster_labels_epsilon = spectral_clustering_epsilon(X, n_clusters=n_clusters, epsilon=epsilon, random_state=3982)
@@ -31,10 +31,10 @@ def clustering(
     clusters = cluster_labels_k if neighbors_instead_of_k else cluster_labels_epsilon
 
     return {
-        "clusters" : clusters,
-        "used_neighbors_instead_of_k" : neighbors_instead_of_k,
-        "score_k" : score_k,
-        "score_epsilon" : score_epsilon
+        "clusters": clusters,
+        "used_neighbors_instead_of_k": neighbors_instead_of_k,
+        "score_k": score_k,
+        "score_epsilon": score_epsilon
     }
 
 def reduce_dimensionality(

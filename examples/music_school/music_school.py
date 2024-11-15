@@ -31,13 +31,9 @@ SCENARIOS = {
     }
 }
 
-def main():
-    """
-    Main function to load, clean, and prepare the dataset.
-    """
-    
+def main():    
     warnings.filterwarnings("ignore", category=UserWarning)
-    pd.set_option('display.max_columns', 3)  
+    pd.set_option('display.max_columns', 5)  
 
     print("ELT\n---\n")
     df = transform(load(extract()))
