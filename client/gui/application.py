@@ -21,6 +21,6 @@ class Application:
         if weightings is not None:
             df = apply_weights(df, weightings)
         
-        clustering_result = clustering(df, self.n_clusters, method=self.method.value)
+        clustering_result = clustering(df, self.n_clusters, method=self.method)
         graphics = generate_graphics(df, clustering_result["clusters"])
         save(df, graphics, clustering_result, self.suffix)

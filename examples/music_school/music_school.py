@@ -1,12 +1,14 @@
 
 from typing import Dict
 import pandas as pd
+
+from client.engine.dimensionality_reduction_method import DimensionalityReductionMethod
 from .load_data import transform, extract, load
 import warnings
 from client.gui.application import Application
 
 N_CLUSTERS = 5
-METHOD = "t-SNE"
+METHOD = DimensionalityReductionMethod.TSNE
 SCENARIOS = {
     "Scenario 1": {
         'Anxiety': 10,
@@ -45,7 +47,7 @@ def main():
     for scenario in SCENARIOS:
         print(f"\nCurrent scenario : {scenario}\n---\n")
         print(SCENARIOS[scenario])
-        Application(N_CLUSTERS, METHOD).process(df, SCENARIOS[scenario])
+        Application(N_CLUSTERS, METHOD, scenario).process(df, SCENARIOS[scenario])
         print("========================================================")
 
 if __name__ == '__main__':
