@@ -8,7 +8,7 @@ Tools to help primary school teacher to manage children based on their psycholog
 
 - [Introduction](#introduction)
 - [Features](#features)
-- Setup
+- [Setup](#setup)
     - [Installation](#installation)
     - [Run](#run)
 - [Future Development](#future-development)
@@ -50,7 +50,29 @@ To further refine groupings, teachers may assign custom weights to each metric a
 
 ## Features
 
-Clustering
+- Clustering
+- Graphics
+
+### Example
+
+Demonstration on ``music_school`` dataset :
+- Glimpse of ``clusters.csv``
+```
+index,cluster
+430,0
+432,0
+674,0
+673,0
+172,0
+671,0
+```
+- Glimpse of heatmaps
+    - <p align="center"><img src="./resources/doc/cluster_correlation_heat_map.png" width=400><img src="./resources/doc/heat_map_std.png" width=400></p>
+- Glimpse of distributions' histograms
+    - <p align="center"><img src="./resources/doc/features_histogram_of_Anxiety.png" width=400><img src="./resources/doc/features_histogram_of_Insomnia.png" width=400></p>
+- Glimpse of distributions' boxplots
+    - <p align="center"><img src="./resources/doc/numerical_distribution_of_Anxiety.png" width=400><img src="./resources/doc/numerical_distribution_of_Insomnia.png" width=400></p>
+
 
 ## Setup
 
