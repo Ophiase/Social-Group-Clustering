@@ -3,6 +3,8 @@ SOURCES = client/main.py
 TESTS = test_x
 EXAMPLES = music_school
 
+# ----------------------------------------------------------------------------------
+
 run:
 	python3 -m client.main
 
@@ -15,10 +17,22 @@ test_verbose:
 demo:
 	$(foreach example,$(EXAMPLES),python3 -m examples.$(example).$(example);)
 
+# ----------------------------------------------------------------------------------
+
 conda_install:
 	conda env create -f environment.yml
 
 conda_remove:
 	conda remove --name social-group-clustering --all
+
+# ----------------------------------------------------------------------------------
+
+docker_build:
+	docker build -t social-group-clustering .
+
+docker_run:
+	@echo TODO
+
+# ----------------------------------------------------------------------------------
 
 .PHONY: run
