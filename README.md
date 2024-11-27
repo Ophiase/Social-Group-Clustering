@@ -67,11 +67,11 @@ index,cluster
 671,0
 ```
 - Glimpse of heatmaps
-    - <p align="center"><img src="./resources/doc/cluster_correlation_heat_map.png" width=400><img src="./resources/doc/heat_map_std.png" width=400></p>
+    - <p align="center"><img src="./resources/doc/cluster_correlation_heat_map.png" width=300><img src="./resources/doc/heat_map_std.png" width=300></p>
 - Glimpse of distributions' histograms
-    - <p align="center"><img src="./resources/doc/features_histogram_of_Anxiety.png" width=400><img src="./resources/doc/features_histogram_of_Insomnia.png" width=400></p>
+    - <p align="center"><img src="./resources/doc/features_histogram_of_Anxiety.png" width=300><img src="./resources/doc/features_histogram_of_Insomnia.png" width=300></p>
 - Glimpse of distributions' boxplots
-    - <p align="center"><img src="./resources/doc/numerical_distribution_of_Anxiety.png" width=400><img src="./resources/doc/numerical_distribution_of_Insomnia.png" width=400></p>
+    - <p align="center"><img src="./resources/doc/numerical_distribution_of_Anxiety.png" width=300><img src="./resources/doc/numerical_distribution_of_Insomnia.png" width=300></p>
 
 
 ## Setup
